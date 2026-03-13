@@ -1,63 +1,4 @@
 
-// import { GoogleGenAI } from "@google/genai";
-
-// const genAI = new GoogleGenAI({
-//   apiKey: process.env.GEMINI_API_KEY,
-// });
-
-// export async function POST(req) {
-
-//   try {
-
-//     const { message } = await req.json();
-
-//     if (!message) {
-//       return Response.json({ error: "Message required" }, { status: 400 });
-//     }
-
-//     const prompt = `
-// You are Mentora AI, an AI career coach.
-
-// Help users with:
-// - career guidance
-// - interview preparation
-// - resume improvement
-// - job skills
-
-// User Question:
-// ${message}
-
-// Rules:
-// - Do NOT use markdown
-// - Do NOT use symbols like *, -, or #
-// - Write in simple paragraphs
-// - Keep the answer clear and concise
-
-// Give a clean plain text answer.
-
-
-// Give a clear and helpful answer.
-// `;
-
-//     const result = await genAI.models.generateContent({
-//       model: "gemini-2.5-flash",
-//       contents: prompt,
-//     });
-
-//     const reply = result.text.trim();
-
-//     return Response.json({ reply });
-
-//   } catch (error) {
-
-//     console.error("Chatbot Error:", error);
-
-//     return Response.json(
-//       { error: "Failed to generate response" },
-//       { status: 500 }
-//     );
-//   }
-// }
 import { GoogleGenAI } from "@google/genai";
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
@@ -67,7 +8,6 @@ const genAI = new GoogleGenAI({
 });
 
 export async function POST(req) {
-
   try {
 
     const { userId } = await auth();
@@ -99,34 +39,67 @@ export async function POST(req) {
       }
     });
 
+    /*
+    ==========================
+    GET LAST MESSAGES (CONTEXT)
+    ==========================
+    */
+
+    const history = await db.chatMessage.findMany({
+      where: { userId: user.id },
+      orderBy: { createdAt: "asc" },
+      take: 6 // last 6 messages
+    });
+
+    const conversation = history
+      .map(msg => `${msg.role === "user" ? "User" : "AI"}: ${msg.message}`)
+      .join("\n");
+
     const prompt = `
 You are Mentora AI, an AI career coach.
 
 Help users with:
- - career guidance
- - interview preparation
- - resume improvement
- - job skills
+career guidance
+interview preparation
+resume improvement
+job skills
 
- User Question:
- ${message}
- Rules:
- - Do NOT use markdown
- - Do NOT use symbols like *, -, or #
- - Write in simple paragraphs
- - Keep the answer clear and concise
+Conversation history:
+${conversation}
 
- Give a clean plain text answer.
+User question:
+${message}
 
-Give a helpful and concise answer in plain text.
+Rules:
+Use plain text only.
+Do not use markdown or symbols.
+Write short clear paragraphs.
+Maximum 5 sentences.
+
+Give a helpful answer.
 `;
 
-    const result = await genAI.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-    });
+    let reply;
 
-    const reply = result.text.trim();
+    try {
+
+      const result = await genAI.models.generateContent({
+        model: "gemini-2.5-flash-lite",
+        contents: prompt,
+      });
+
+      reply = result.text.trim();
+
+    } catch (error) {
+
+      if (error.status === 429) {
+        reply = "Mentora AI is currently busy. Please try again in a minute.";
+      } else {
+        reply = "Mentora AI could not generate a response right now.";
+      }
+
+      console.error("Gemini Error:", error);
+    }
 
     // Save AI response
     await db.chatMessage.create({
@@ -149,7 +122,6 @@ Give a helpful and concise answer in plain text.
     );
   }
 }
-
 
 
 export async function GET() {

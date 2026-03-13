@@ -33,12 +33,12 @@ export default function PerformanceChart({ assessments }) {
           new Date(b.createdAt).getTime()
       )
       .map((assessment) => ({
-        label: format(new Date(assessment.createdAt), "MMM dd HH:mm"),
+        label: format(new Date(assessment.createdAt), "MMM dd"),   // UPDATED FORMAT
         score:
           assessment.quizScore !== null &&
           assessment.quizScore !== undefined
             ? assessment.quizScore
-            : null, 
+            : null,
       }));
 
     setChartData(formattedData);
@@ -85,7 +85,6 @@ export default function PerformanceChart({ assessments }) {
                 }}
               />
 
-            
               <Line
                 type="monotone"
                 dataKey="score"
@@ -93,7 +92,7 @@ export default function PerformanceChart({ assessments }) {
                 strokeWidth={3}
                 dot={{ r: 5 }}
                 activeDot={{ r: 7 }}
-                connectNulls={false} 
+                connectNulls={false}
               />
             </LineChart>
           </ResponsiveContainer>
