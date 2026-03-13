@@ -1,4 +1,145 @@
 
+// "use client";
+
+// import { useState } from "react";
+// import { MessageCircle, X } from "lucide-react";
+
+// export default function Chatbot() {
+
+//   const [open,setOpen] = useState(false);
+//   const [showPopup,setShowPopup] = useState(true);
+//   const [bounce,setBounce] = useState(true);
+//   const [message,setMessage] = useState("");
+//   const [chat,setChat] = useState([]);
+
+//   const sendMessage = async () => {
+
+//     if(!message) return;
+
+//     const newChat = [...chat,{role:"user",text:message}];
+//     setChat(newChat);
+
+//     const res = await fetch("/api/chat",{
+//       method:"POST",
+//       body:JSON.stringify({message})
+//     });
+
+//     const data = await res.json();
+
+//     setChat([
+//       ...newChat,
+//       {role:"assistant",text:data.reply}
+//     ]);
+
+//     setMessage("");
+//   };
+
+//   return (
+//     <>
+//       {/* Popup Message */}
+//       {showPopup && !open && (
+//         <div className="fixed bottom-24 right-6 bg-white shadow-xl rounded-lg p-4 w-64 text-sm animate-bounce">
+
+//           <div className="flex justify-between items-start">
+//             <p className="text-gray-800">
+//               👋 Hi! I'm <b>Mentora AI</b>.<br/>
+//               Ask me any career question!
+//             </p>
+
+//             <button
+//               onClick={()=>{
+//                 setShowPopup(false);
+//                 setBounce(false);
+//               }}
+//               className="text-gray-400 hover:text-gray-600"
+//             >
+//               <X size={16}/>
+//             </button>
+//           </div>
+
+//         </div>
+//       )}
+
+//       {/* Floating Chat Button */}
+//       {/* <button
+//         onClick={()=>{
+//           setOpen(!open);
+//           setShowPopup(false);
+//           setBounce(false);
+//         }}
+//         className={`fixed bottom-6 right-6 bg-pink-500 text-white p-4 rounded-full shadow-xl transition ${
+//           bounce ? "animate-bounce" : ""
+//         }`}
+//       >
+//         <MessageCircle/>
+//       </button> */}
+//       <button
+//   onClick={()=>{
+//     setOpen(!open);
+//     setShowPopup(false);
+//     setBounce(false);
+//   }}
+//   className={`fixed bottom-6 right-6 
+//   bg-pink-500 text-white p-4 rounded-full 
+//   shadow-lg shadow-pink-400/60 
+//   hover:shadow-pink-500/80 
+//   ring-4 ring-pink-300/40 
+//   transition-all duration-300 
+//   hover:scale-110 
+//   ${bounce ? "animate-bounce" : ""}`}
+// >
+//   <MessageCircle/>
+// </button>
+
+//       {/* Chat Window */}
+//       {open && (
+//         <div className="fixed bottom-20 right-6 w-80 bg-white shadow-2xl rounded-xl p-4">
+
+//           <h3 className="font-bold mb-2">
+//             Mentora AI
+//           </h3>
+
+//           <div className="h-60 overflow-y-auto mb-3 text-sm">
+//             {chat.map((msg,i)=>(
+//               <div key={i} className={msg.role==="user" ? "text-right":"text-left"}>
+//                 <p className="bg-gray-100 p-2 rounded mb-2 inline-block">
+//                   {msg.text}
+//                 </p>
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* <input
+//             className="border w-full p-2 rounded mb-2"
+//             placeholder="Ask career question..."
+//             value={message}
+//             onChange={(e)=>setMessage(e.target.value)}
+//           /> */}
+//           <input
+//   className="border w-full p-2 rounded mb-2"
+//   placeholder="Ask career question..."
+//   value={message}
+//   onChange={(e)=>setMessage(e.target.value)}
+//   onKeyDown={(e)=>{
+//     if(e.key === "Enter"){
+//       e.preventDefault();
+//       sendMessage();
+//     }
+//   }}
+// />
+
+//           <button
+//             onClick={sendMessage}
+//             className="bg-pink-500 text-white px-4 py-2 rounded-full w-full hover:bg-pink-600 transition"
+//           >
+//             Ask AI
+//           </button>
+
+//         </div>
+//       )}
+//     </>
+//   );
+// }
 "use client";
 
 import { useState } from "react";
@@ -11,27 +152,42 @@ export default function Chatbot() {
   const [bounce,setBounce] = useState(true);
   const [message,setMessage] = useState("");
   const [chat,setChat] = useState([]);
+  const [loading,setLoading] = useState(false);
 
   const sendMessage = async () => {
 
-    if(!message) return;
+    if(!message.trim()) return;
 
-    const newChat = [...chat,{role:"user",text:message}];
+    const userMessage = message;
+
+    const newChat = [...chat,{role:"user",text:userMessage}];
     setChat(newChat);
 
-    const res = await fetch("/api/chat",{
-      method:"POST",
-      body:JSON.stringify({message})
-    });
-
-    const data = await res.json();
-
-    setChat([
-      ...newChat,
-      {role:"assistant",text:data.reply}
-    ]);
-
+    // clear input immediately
     setMessage("");
+
+    // start loading
+    setLoading(true);
+
+    try{
+
+      const res = await fetch("/api/chat",{
+        method:"POST",
+        body:JSON.stringify({message:userMessage})
+      });
+
+      const data = await res.json();
+
+      setChat([
+        ...newChat,
+        {role:"assistant",text:data.reply}
+      ]);
+
+    }catch(error){
+      console.error("Chat error:",error);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -61,35 +217,23 @@ export default function Chatbot() {
       )}
 
       {/* Floating Chat Button */}
-      {/* <button
+      <button
         onClick={()=>{
           setOpen(!open);
           setShowPopup(false);
           setBounce(false);
         }}
-        className={`fixed bottom-6 right-6 bg-pink-500 text-white p-4 rounded-full shadow-xl transition ${
-          bounce ? "animate-bounce" : ""
-        }`}
+        className={`fixed bottom-6 right-6 
+        bg-pink-500 text-white p-4 rounded-full 
+        shadow-lg shadow-pink-400/60 
+        hover:shadow-pink-500/80 
+        ring-4 ring-pink-300/40 
+        transition-all duration-300 
+        hover:scale-110 
+        ${bounce ? "animate-bounce" : ""}`}
       >
         <MessageCircle/>
-      </button> */}
-      <button
-  onClick={()=>{
-    setOpen(!open);
-    setShowPopup(false);
-    setBounce(false);
-  }}
-  className={`fixed bottom-6 right-6 
-  bg-pink-500 text-white p-4 rounded-full 
-  shadow-lg shadow-pink-400/60 
-  hover:shadow-pink-500/80 
-  ring-4 ring-pink-300/40 
-  transition-all duration-300 
-  hover:scale-110 
-  ${bounce ? "animate-bounce" : ""}`}
->
-  <MessageCircle/>
-</button>
+      </button>
 
       {/* Chat Window */}
       {open && (
@@ -100,34 +244,45 @@ export default function Chatbot() {
           </h3>
 
           <div className="h-60 overflow-y-auto mb-3 text-sm">
+
             {chat.map((msg,i)=>(
               <div key={i} className={msg.role==="user" ? "text-right":"text-left"}>
-                <p className="bg-gray-100 p-2 rounded mb-2 inline-block">
+                <p className={`p-2 rounded mb-2 inline-block ${
+                  msg.role==="user"
+                    ? "bg-pink-500 text-white"
+                    : "bg-gray-100 text-gray-800"
+                }`}>
                   {msg.text}
                 </p>
               </div>
             ))}
+
+            {/* AI Loading Animation */}
+            {loading && (
+              <div className="text-left">
+                <p className="bg-gray-100 p-2 rounded mb-2 inline-block">
+                  <span className="animate-pulse">● ● ●</span>
+                </p>
+              </div>
+            )}
+
           </div>
 
-          {/* <input
+          {/* Input */}
+          <input
             className="border w-full p-2 rounded mb-2"
             placeholder="Ask career question..."
             value={message}
             onChange={(e)=>setMessage(e.target.value)}
-          /> */}
-          <input
-  className="border w-full p-2 rounded mb-2"
-  placeholder="Ask career question..."
-  value={message}
-  onChange={(e)=>setMessage(e.target.value)}
-  onKeyDown={(e)=>{
-    if(e.key === "Enter"){
-      e.preventDefault();
-      sendMessage();
-    }
-  }}
-/>
+            onKeyDown={(e)=>{
+              if(e.key === "Enter"){
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
+          />
 
+          {/* Button */}
           <button
             onClick={sendMessage}
             className="bg-pink-500 text-white px-4 py-2 rounded-full w-full hover:bg-pink-600 transition"
