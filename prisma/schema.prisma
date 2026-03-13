@@ -22,6 +22,7 @@ model User {
   assessments     Assessment[]
   coverLetter     CoverLetter[]
   resume          Resume?
+  chatMessages    ChatMessage[]
   industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
 }
 
@@ -79,7 +80,15 @@ model IndustryInsight {
 
   @@index([industry])
 }
+model ChatMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  role      String   // "user" or "assistant"
+  message   String
+  createdAt DateTime @default(now())
 
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 enum DemandLevel {
   HIGH
   MEDIUM
