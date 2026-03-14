@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
             {/* <footer className="bg-muted/50 py-12"> */}
             
              
-           <footer className="bg-gradient-to-r from-pink-300 via-fuchsia-300 to-purple-400 py-12">
+           <footer className="bg-linear-to-r from-pink-300 via-fuchsia-300 to-purple-400 py-12">
   <div className="container mx-auto px-4 text-center text-black">
     <p className="font-medium">
       Made with 💖 by <span className="text-purple-800">ISHAN & ISHANI</span>

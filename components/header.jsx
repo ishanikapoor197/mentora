@@ -9,6 +9,7 @@ import {
   FileText,
   LayoutDashboard,
   PenBox,
+  Phone,
   StarsIcon
 } from "lucide-react"
 
@@ -102,6 +103,16 @@ const Header = async () => {
                     <span>Mock Test</span>
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/interview"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <Phone className="h-4 w-4" />
+                    <span>Join an Interview call</span>
+                  </Link>
+                </DropdownMenuItem>
+
 
               </DropdownMenuContent>
 

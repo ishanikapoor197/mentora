@@ -55,29 +55,7 @@ export async function POST(req) {
       .map(msg => `${msg.role === "user" ? "User" : "AI"}: ${msg.message}`)
       .join("\n");
 
-//     const prompt = `
-// You are Mentora AI, an AI career coach.
 
-// Help users with:
-// career guidance
-// interview preparation
-// resume improvement
-// job skills
-
-// Conversation history:
-// ${conversation}
-
-// User question:
-// ${message}
-
-// Rules:
-// Use plain text only.
-// Do not use markdown or symbols.
-// Write short clear paragraphs.
-// Maximum 5 sentences.
-
-// Give a helpful answer.
-// `;
 const prompt = `
 You are Mentora AI, the built-in AI assistant inside the Mentora career platform.
 
