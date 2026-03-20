@@ -90,7 +90,7 @@ Be helpful and explain Mentora features clearly.
     try {
 
       const result = await genAI.models.generateContent({
-        model: "gemini-2.5-flash-lite",
+        model: "gemini-2.5-flash",
         contents: prompt,
       });
 

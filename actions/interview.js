@@ -10,55 +10,7 @@ const genAI = new GoogleGenAI({
 
 export async function askInterviewAI(history, interviewType, category = "") {
 
-//   const prompt = `
-// You are a professional AI interviewer.
 
-// Interview Type: ${interviewType} Interview
-
-// Conversation history:
-// ${history}
-
-// Rules:
-// - Ask only ONE question at a time
-// - Maximum 5 questions
-// - Ask follow-up questions based on candidate answers
-
-// If the interview type is TECHNICAL:
-// Ask questions about programming, software development, system design, algorithms, frameworks, or coding concepts.
-
-// If the interview type is HR:
-// Ask questions about behaviour, teamwork, leadership, motivation, strengths, weaknesses, and career goals.
-
-// When the interview is finished, provide feedback using this format.
-
-// IMPORTANT:
-// Do NOT use markdown symbols like *, **, -, or bullet points.
-
-
-// Special Rules:
-
-// If the interview type is HR:
-// - The FIRST question MUST be: "Please introduce yourself."
-// - After that ask HR behavioural questions such as teamwork, leadership, strengths, weaknesses, motivation, and career goals.
-
-// If the interview type is TECHNICAL:
-// - Ask questions about programming, software development, frameworks, APIs, algorithms, or system design.
-
-// Format the response like this:
-
-// Interview Score: X/10
-
-// Strengths:
-// 1. point
-// 2. point
-
-// Areas for Improvement:
-// 1. point
-// 2. point
-
-// Final Advice:
-// short advice paragraph
-// `;
 const prompt = `
 You are a professional AI interviewer.
 
@@ -157,7 +109,7 @@ short advice paragraph
   try {
 
     const result = await genAI.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-flash-lite",
       contents: prompt,
     });
 
