@@ -23,6 +23,7 @@ model User {
   coverLetter     CoverLetter[]
   resume          Resume?
   chatMessages    ChatMessage[]
+  skillGapAnalyses  SkillGapAnalysis[] 
   industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
 }
 
@@ -89,6 +90,19 @@ model ChatMessage {
 
   user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+model SkillGapAnalysis {
+  id            String   @id @default(cuid())
+  userId        String
+  userSkills    String   // JSON array of skills
+  targetRole    String
+  matchScore    Float
+  missingSkills String   // JSON array
+  matchedSkills String   // JSON array
+  createdAt     DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id])
+}
+
 enum DemandLevel {
   HIGH
   MEDIUM

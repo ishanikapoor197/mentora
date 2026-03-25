@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import {
+  Brain,
   ChevronDown,
   ClipboardCheck,
   FileText,
@@ -110,6 +111,15 @@ const Header = async () => {
                   >
                     <Phone className="h-4 w-4" />
                     <span>Join an Interview call</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/skill-gap"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <Brain className="h-4 w-4" />
+                    <span>Skill Gap Analyser</span>
                   </Link>
                 </DropdownMenuItem>
 
