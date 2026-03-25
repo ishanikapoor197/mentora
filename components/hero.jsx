@@ -47,7 +47,7 @@ useEffect(()=>{
             </div>
             <div className="flex justify-center space-x-4">
                 <Link href='/dashboard'>
-                <Button size='lg' className="px-8">Let’s go
+                <Button size='lg' className="px-8 bg-blue-200">Let’s go
                     </Button>
                     </Link>
                     

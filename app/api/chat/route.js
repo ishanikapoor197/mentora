@@ -83,6 +83,9 @@ Use plain text only.
 Write short clear paragraphs.
 Maximum 5 sentences.
 
+IMPORTANT:
+Do NOT use markdown symbols like *, **, -, or bullet points.
+
 Be helpful and explain Mentora features clearly.
 `;
     let reply;

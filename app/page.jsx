@@ -10,13 +10,13 @@ import { testimonial } from "@/data/testimonial";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion"
 
 
 
 
-export default  function Home() {
-  
+export default function Home() {
+
   return (
     <div>
 
@@ -30,20 +30,20 @@ export default  function Home() {
           <h2 className="text-3xl font-bold tracking-tighter text-center mb-12">
             Robust features built to accelerate your professional development
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{once: false, amount: 0.3 }}
+                viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}>
-              <Card
-                key={index}
-        
+                <Card
+                  key={index}
 
-        className={`
+
+                  className={`
     group relative overflow-hidden
     rounded-2xl
    
@@ -67,15 +67,15 @@ export default  function Home() {
         
         
         ${index === 1 ? "lg:mt-12" : ""
-                  }
+                    }
         ${index === 2 ? "lg:mt-24" : ""
-                  }
+                    }
         ${index === 3 ? "lg:mt-36" : ""
-                  }
+                    }
       `}
-              >
-                <div
-  className="
+                >
+                  <div
+                    className="
     pointer-events-none
     absolute -inset-1
     rounded-2xl
@@ -89,9 +89,9 @@ export default  function Home() {
     group-hover:opacity-100
     transition-opacity duration-300
   "
-/>
-<div
-  className="
+                  />
+                  <div
+                    className="
     pointer-events-none
     absolute inset-0
     rounded-2xl
@@ -104,23 +104,23 @@ export default  function Home() {
     group-hover:ring-pink-500/40
     transition
   "
-/>
+                  />
 
 
-                <CardContent className="pt-6 text-center flex flex-col items-center">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    {feature.icon}
+                  <CardContent className="pt-6 text-center flex flex-col items-center">
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      {feature.icon}
 
-                    <h3 className="text-xl font-bold">
-                      {feature.title}
-                    </h3>
+                      <h3 className="text-xl font-bold">
+                        {feature.title}
+                      </h3>
 
-                    <p className="text-muted-foreground text-sm">
-                      {feature.description}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+                      <p className="text-muted-foreground text-sm">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
@@ -129,62 +129,61 @@ export default  function Home() {
       </section>
 
       <section className="w-full py-12 md:py-24 bg-muted/50">
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
 
-      {[
-        { value: "50+", text: "Industries Covered", glow: true },
-        { value: "500+", text: "Interview Questions", glow: true },
-        { value: "95%", text: "Success Rate", glow: true },
-        { value: "24/7", text: "AI Support", glow: true },
-        
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center justify-center space-y-4 text-center"
-        >
-          
-          <div
-            className={`
+            {[
+              { value: "50+", text: "Industries Covered", glow: true },
+              { value: "500+", text: "Interview Questions", glow: true },
+              { value: "95%", text: "Success Rate", glow: true },
+              { value: "24/7", text: "AI Support", glow: true },
+
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center space-y-4 text-center"
+              >
+
+                <div
+                  className={`
               w-18 h-18 rounded-full
               flex items-center justify-center
               text-2xl font-bold
               bg-background/60 backdrop-blur-md
               transition-transform duration-300 hover:scale-105
-              ${
-                item.glow
-                  ? "border-2 border-primary text-primary ring-2 ring-primary/40 shadow-[0_0_25px_rgba(59,130,246,0.35)]"
-                  : "border-2 border-border text-foreground"
-              }
+              ${item.glow
+                      ? "border-2 border-primary text-primary ring-2 ring-primary/40 shadow-[0_0_25px_rgba(59,130,246,0.35)]"
+                      : "border-2 border-border text-foreground"
+                    }
             `}
-          >
-            {item.value}
+                >
+                  {item.value}
+                </div>
+
+                <p className="text-muted-foreground text-sm max-w-xs">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl font-bold mb-4">
+              How It Works
+            </h2>
+            <p>Four simple steps to accelerate your career growth</p>
           </div>
 
-          <p className="text-muted-foreground text-sm max-w-xs">
-            {item.text}
-          </p>
-        </div>
-      ))}
-
-    </div>
-  </div>
-</section>
-
-<section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-  <div className="container mx-auto px-4 md:px-6">
-    <div className="text-center max-w-3xl mx-auto mb-12">
-      <h2 className="text-3xl font-bold mb-4">
-        How It Works
-      </h2>
-      <p>Four simple steps to accelerate your career growth</p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-      {howItWorks.map((item, index) => (
-        <div
-          key={index}
-          className="
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {howItWorks.map((item, index) => (
+              <div
+                key={index}
+                className="
             group relative
             flex flex-col items-center text-center space-y-4
             p-6 rounded-xl
@@ -198,10 +197,10 @@ export default  function Home() {
             hover:via-pink-500/10
             hover:to-fuchsia-500/10
           "
-        >
-          {/* Icon wrapper */}
-          <div
-            className="
+              >
+                {/* Icon wrapper */}
+                <div
+                  className="
               relative
               w-16 h-16 rounded-full
               flex items-center justify-center
@@ -211,10 +210,10 @@ export default  function Home() {
 
               group-hover:bg-transparent
             "
-          >
-            {/* Glow */}
-            <div
-              className="
+                >
+                  {/* Glow */}
+                  <div
+                    className="
                 pointer-events-none
                 absolute -inset-2
                 rounded-full
@@ -228,16 +227,16 @@ export default  function Home() {
                 group-hover:opacity-100
                 transition-opacity duration-300
               "
-            />
+                  />
 
-            <span className="relative z-10">
-              {item.icon}
-            </span>
-          </div>
+                  <span className="relative z-10">
+                    {item.icon}
+                  </span>
+                </div>
 
-          {/* Title */}
-          <h3
-            className="
+                {/* Title */}
+                <h3
+                  className="
               font-semibold text-xl
               transition-all duration-300
 
@@ -247,23 +246,23 @@ export default  function Home() {
               group-hover:from-purple-400
               group-hover:to-pink-400
             "
-          >
-            {item.title}
-          </h3>
+                >
+                  {item.title}
+                </h3>
 
-          {/* Description */}
-          <p className="text-muted-foreground">
-            {item.description}
-          </p>
+                {/* Description */}
+                <p className="text-muted-foreground">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
 
 
- 
+
       <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl font-bold tracking-tighter text-center mb-12">
@@ -288,8 +287,8 @@ export default  function Home() {
                         /></div>
                         <div>
                           <p className="font-semibold">{testimonial.author}</p>
-                            <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                            <p className="text-sm text-primary">{testimonial.company}
+                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                          <p className="text-sm text-primary">{testimonial.company}
                           </p>
                         </div>
                       </div>
@@ -326,18 +325,18 @@ export default  function Home() {
           </div>
           <div className="max-w-6xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
-              
-            
-            {faqs.map((faq, index) => {
-              return(
-                <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-              )
-            })}
+
+
+              {faqs.map((faq, index) => {
+                return (
+                  <AccordionItem key={index} value={`item-${index}`}>
+                    <AccordionTrigger>{faq.question}</AccordionTrigger>
+                    <AccordionContent>
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                )
+              })}
             </Accordion>
           </div>
         </div>
@@ -345,8 +344,8 @@ export default  function Home() {
 
 
 
-       
-<section className="w-full">
+
+      {/* <section className="w-full">
   <div className="mx-auto py-24 bg-linear-to-r from-purple-100 to-pink-100 rounded-lg">
     <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-3xl mx-auto">
 
@@ -371,8 +370,20 @@ export default  function Home() {
 
     </div>
   </div>
-</section>
-
+</section> */}
+      <section className="w-full">
+        <div className="mx-auto py-24 gradient rounded-lg">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold tracking-tighter text-primary-foreground sm:text-4xl md:text-5xl"> Ready to take your career to the next level? </h2>
+            <p className="mx-auto max-w:600px text-primary-foreground/80 md:text-xl">Thousands of professionals are already using AI to accelerate their careers.</p>
+            <Link href="/dashboard" passHref>
+              <Button size="lg" variant="secondary" className="h-11 mt-5 animate-bounce"> Take the first step today
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button> 
+              </Link> 
+              </div>
+               </div>
+                </section>
 
     </div>
   );

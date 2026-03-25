@@ -30,6 +30,9 @@ Generate 10 technical interview questions for a ${
   }.
 
 Each question should be multiple choice with 4 options.
+Ask questions based on the candidate resume content such as projects, skills, and technologies used.
+IMPORTANT:
+Do NOT use markdown symbols like *, **, -, or bullet points.
 
 Return the response in this JSON format only, no additional text:
 {

@@ -60,10 +60,10 @@ const Header = async () => {
             <DropdownMenu>
 
               <DropdownMenuTrigger asChild>
-                <Button className=" text-white">
+                <Button className="bg-blue-200" >
                   <span className="flex items-center gap-2">
                     <StarsIcon className="h-4 w-4" />
-                    <span className="hidden md:block">Growth Tools</span>
+                    <span className="hidden md:block ">Growth Tools</span>
                     <ChevronDown className="h-4 w-4" />
                   </span>
                 </Button>
@@ -71,7 +71,7 @@ const Header = async () => {
 
               <DropdownMenuContent
                 align="end"
-                className="w-48 bg-white/95 backdrop-blur-md border border-gray-200 shadow-xl rounded-lg z-50"
+                className="w-48 bg-gray-900 border border-gray-700 shadow-xl rounded-lg z-50 text-white"
               >
 
                 <DropdownMenuItem asChild>

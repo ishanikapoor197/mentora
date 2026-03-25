@@ -18,28 +18,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      // <ClerkProvider appearance={{
-      //   baseTheme:dark,
-      // }}>
-      <ClerkProvider
-  appearance={{
-    baseTheme: dark,
-    variables: {
-      colorPrimary: "#ec4899",   // pink
-      colorBackground: "#1a0015", 
-      colorText: "#ffffff",
-      borderRadius: "8px",
-    },
-  }}
->
+      <ClerkProvider appearance={{
+        baseTheme:dark,
+      }}>
+
+
+
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} `}
         >
         <ThemeProvider
             attribute="class"
-            defaultTheme="light"
-            enableSystem
+            defaultTheme="dark"
+            enableSystem={false}
             disableTransitionOnChange
             >
             {/* header */}
@@ -54,10 +46,17 @@ export default function RootLayout({ children }) {
             {/* <footer className="bg-muted/50 py-12"> */}
             
              
-           <footer className="bg-linear-to-r from-pink-300 via-fuchsia-300 to-purple-400 py-12">
+           {/* <footer className="bg-black border-t border-gray-800 py-12">
   <div className="container mx-auto px-4 text-center text-black">
     <p className="font-medium">
       Made with 💖 by <span className="text-purple-800">ISHAN & ISHANI</span>
+    </p>
+  </div>
+</footer> */}
+<footer className="bg-black border-t border-gray-800 py-12">
+  <div className="container mx-auto px-4 text-center text-gray-400">
+    <p>
+      Made with 💖 by <span className="text-blue-500">ISHAN & ISHANI</span>
     </p>
   </div>
 </footer>

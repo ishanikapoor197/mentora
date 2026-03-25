@@ -111,11 +111,11 @@ setLoading(false);
 return (
 <>
 {/* Popup Message */}
-{showPopup && !open && ( <div className="fixed bottom-24 right-6 bg-white shadow-xl rounded-lg p-4 w-64 text-sm animate-bounce">
+{showPopup && !open && ( <div className="fixed bottom-24 right-6 bg-gray-900 shadow-xl rounded-lg p-4 w-64 text-sm animate-bounce border border-gray-700">
 
 
       <div className="flex justify-between items-start">
-        <p className="text-gray-800">
+        <p className="text-white">
           👋 Hi! I'm <b>Mentora AI</b>.<br/>
           Ask me any career question!
         </p>
@@ -125,7 +125,7 @@ return (
             setShowPopup(false);
             setBounce(false);
           }}
-          className="text-gray-400 hover:text-gray-600"
+          className="text-gray-400 hover:text-white"
         >
           <X size={16}/>
         </button>
@@ -141,21 +141,28 @@ return (
       setShowPopup(false);
       setBounce(false);
     }}
+    // className={`fixed bottom-6 right-6 
+    // bg-pink-500 text-white p-4 rounded-full 
+    // shadow-lg shadow-pink-400/60 
+    // hover:shadow-pink-500/80 
+    // ring-4 ring-pink-300/40 
+    // transition-all duration-300 
+    // hover:scale-110 
+    // ${bounce ? "animate-bounce" : ""}`}
     className={`fixed bottom-6 right-6 
-    bg-pink-500 text-white p-4 rounded-full 
-    shadow-lg shadow-pink-400/60 
-    hover:shadow-pink-500/80 
-    ring-4 ring-pink-300/40 
-    transition-all duration-300 
-    hover:scale-110 
-    ${bounce ? "animate-bounce" : ""}`}
+        bg-blue-500 text-white p-4 rounded-full 
+        shadow-lg hover:shadow-xl
+        border border-gray-700
+        transition-all duration-300 
+        hover:scale-110 
+        ${bounce ? "animate-bounce" : ""}`}
   >
     <MessageCircle/>
   </button>
 
   {/* Chat Window */}
   {open && (
-    <div className="fixed bottom-20 right-6 w-80 bg-white shadow-2xl rounded-xl p-4">
+    <div className="fixed bottom-20 right-6 w-80 bg-gray-900 text-white shadow-2xl rounded-xl p-4 bg-gray-900">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-2">
@@ -166,7 +173,7 @@ return (
         {/* Close Chat Button */}
         <button
           onClick={()=>setOpen(false)}
-          className="text-gray-400 hover:text-gray-600"
+          className="text-gray-400 hover:text-white"
         >
           <X size={18}/>
         </button>
@@ -179,8 +186,8 @@ return (
           <div key={i} className={msg.role==="user" ? "text-right":"text-left"}>
             <p className={`p-2 rounded mb-2 inline-block ${
               msg.role==="user"
-                ? "bg-pink-500 text-white"
-                : "bg-gray-100 text-gray-800"
+                ? "bg-white text-black"
+                    : "bg-gray-800 text-white"
             }`}>
               {msg.text}
             </p>
@@ -190,7 +197,7 @@ return (
         {/* AI Loading Animation */}
         {loading && (
           <div className="text-left">
-            <p className="bg-gray-100 p-2 rounded mb-2 inline-block">
+            <p className="bg-gray-800 p-2 rounded mb-2 inline-block">
               <span className="animate-pulse">● ● ●</span>
             </p>
           </div>
@@ -204,7 +211,7 @@ return (
       {chat.length > 0 && (
         <button
           onClick={()=>setChat([])}
-          className="text-xs text-gray-500 mb-2 hover:text-gray-700"
+          className="text-xs text-gray-400 mb-2 hover:text-white"
         >
           Clear Chat
         </button>
@@ -213,7 +220,7 @@ return (
       {/* Input */}
       <input
         disabled={!isSignedIn}
-        className="border w-full p-2 rounded mb-2 disabled:bg-gray-200"
+        className="border border-gray-700 bg-gray-800 w-full p-2 rounded mb-2 text-white placeholder-gray-400"
         placeholder={
           isSignedIn
             ? "Ask career question..."
@@ -232,7 +239,7 @@ return (
       {/* Button */}
       <button
         onClick={sendMessage}
-        className="bg-pink-500 text-white px-4 py-2 rounded-full w-full hover:bg-pink-600 transition"
+        className="bg-blue-500 text-black px-4 py-2 rounded-full w-full hover:bg-gray-200 transition"
       >
         Ask AI
       </button>

@@ -150,9 +150,10 @@ Ask one question at a time.
 
   return (
 
-    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-10">
+    // <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-10">
+    <div className="min-h-screen bg-gray-300 text-black flex flex-col items-center justify-center p-10">
 
-      <h1 className="text-4xl font-bold text-pink-700 mb-10">
+      <h1 className="text-4xl font-bold text-blue-500 mb-10">
         AI Voice Interview
       </h1>
 
@@ -222,7 +223,7 @@ Ask one question at a time.
     {/* Back Button */}
     <button
       onClick={goBackToSelection}
-      className="text-pink-600 mb-8"
+      className="text-pink-600 mb-8  transition duration-300 hover:text-blue-900 hover:translate-x-1"
     >
       ← Back to Interview Type
     </button>
@@ -299,7 +300,7 @@ Ask one question at a time.
 
           <button
             onClick={goBackToSelection}
-            className="text-pink-600 mb-6"
+            className="text-pink-600 mb-6 transition duration-300 hover:text-blue-900 hover:translate-x-1"
           >
             ← Back to Interview Type
           </button>
@@ -401,7 +402,7 @@ Ask one question at a time.
 
             <button
               onClick={goBackToSelection}
-              className="bg-pink-500 text-white px-6 py-2 rounded"
+              className="bg-blue-500 transition duration-300 hover:text-blue-900 hover:translate-x-1 text-white px-6 py-2 rounded"
             >
               Try Another Interview
             </button>
