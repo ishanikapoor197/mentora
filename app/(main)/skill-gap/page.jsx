@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { Brain, Zap } from "lucide-react";
 import SkillGapForm from "@/components/skill-gap/skillGapForm";
 import SkillGapResult from "@/components/skill-gap/skillGapResult";
+import { useUser } from "@clerk/nextjs";
 
 export default function SkillGapPage() {
   const [roles, setRoles] = useState([]);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     fetch("/api/skill-gap")
@@ -19,11 +21,20 @@ export default function SkillGapPage() {
   const handleAnalyze = async ({ user_skills, target_role }) => {
     setLoading(true);
     setResult(null);
+    // const res = await fetch("/api/skill-gap", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ user_skills, target_role }),
+    // });
     const res = await fetch("/api/skill-gap", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_skills, target_role }),
-    });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    user_skills,
+    target_role,
+    userId: user?.id, // 🔥 ADD THIS
+  }),
+});
     const data = await res.json();
     setResult(data);
     setLoading(false);
