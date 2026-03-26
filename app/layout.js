@@ -42,24 +42,12 @@ export default function RootLayout({ children }) {
             </main>
             <Chatbot/>
             <Toaster richColors />
-            {/* footer */}
-            {/* <footer className="bg-muted/50 py-12"> */}
-            
-             
-           {/* <footer className="bg-black border-t border-gray-800 py-12">
-  <div className="container mx-auto px-4 text-center text-black">
-    <p className="font-medium">
-      Made with 💖 by <span className="text-purple-800">ISHAN & ISHANI</span>
-    </p>
-  </div>
-</footer> */}
-<footer className="bg-black border-t border-gray-800 py-12">
-  <div className="container mx-auto px-4 text-center text-gray-400">
-    <p>
-      Made with 💖 by <span className="text-blue-500">ISHAN & ISHANI</span>
-    </p>
-  </div>
-</footer>
+           
+<footer className="bg-muted/50 py-12">
+              <div className="container mx-auto px-4 text-center text-red-200 ">
+                <p>Made with ❤️‍🔥 by <span className="text-blue-500">Ishan and Ishani </span></p>
+              </div>
+            </footer>
           </ThemeProvider>
         
       </body>
