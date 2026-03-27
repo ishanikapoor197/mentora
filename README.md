@@ -82,8 +82,6 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 # Google Gemini AI
 GEMINI_API_KEY=your_gemini_api_key
 
-# OpenRouter (optional fallback)
-OPENROUTER_API_KEY=your_openrouter_api_key
 
 # ML Service
 ML_SERVICE_URL=https://your-ml-service-url.onrender.com
@@ -98,23 +96,6 @@ npx prisma db push
 bashnpm run dev
 Open http://localhost:3000 in your browser.
 
-📁 Project Structure
-mentora/
-├── app/                  # Next.js App Router pages & API routes
-│   ├── (auth)/           # Sign-in / Sign-up pages
-│   ├── (main)/           # Protected dashboard routes
-│   │   ├── dashboard/
-│   │   ├── resume/
-│   │   ├── interview/
-│   │   └── insights/
-│   └── api/              # API route handlers
-├── components/           # Reusable UI components
-├── actions/              # Next.js server actions
-├── lib/                  # Shared utilities & AI client setup
-├── hooks/                # Custom React hooks
-├── data/                 # Static data (questions, industries, etc.)
-├── prisma/               # Prisma schema & migrations
-└── public/               # Static assets
 
 🗃️ Database Schema
 Key models managed by Prisma:
@@ -124,6 +105,9 @@ Resume — stored resume content per user
 CoverLetter — cover letter content per user
 InterviewSession — mock interview attempts & scores
 Assessment — individual question responses
+skill gap analyser- skills, match scores and required skills
+industry insight- onboarding form details
+chatbot-stores chat
 
 
 🔄 Background Jobs (Inngest)
